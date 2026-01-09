@@ -1,4 +1,5 @@
 import tracker from '../api/tracker';
+import { navigate, navigationRef } from '../navigationRef';
 import createDataContext from './createDataContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 

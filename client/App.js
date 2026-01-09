@@ -12,6 +12,7 @@ import TrackCreateScreen from './src/screens/TrackCreateScreen';
 import TrackDetailScreen from './src/screens/TrackDetailScreen';
 import TrackListScreen from './src/screens/TrackListScreen';
 import { AuthContext, AuthProvider } from './src/context/AuthContext';
+import { navigationRef } from './src/navigationRef';
 
 // Stack navigatorlar
 const Stack = createNativeStackNavigator();
@@ -66,16 +67,19 @@ function MainTabs() {
   );
 }
 
-// Root navigator (switch navigator o‘rniga shartli stack)
 function RootNavigator() {
+  const { state } = useContext(AuthContext);
+
+  // const isLoggedIn = !!state.token; // 👈 MUHIM
   const { isLoggedIn } = useContext(AuthContext);
+
   return isLoggedIn ? <MainTabs /> : <LoginStack />;
 }
 
 export default function App() {
   return (
     <AuthProvider>
-      <NavigationContainer>
+      <NavigationContainer ref={navigationRef}>
         <RootNavigator />
       </NavigationContainer>
     </AuthProvider>
