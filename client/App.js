@@ -27,7 +27,11 @@ function LoginStack() {
         component={SignupScreen}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="Signin" component={SigninScreen} />
+      <Stack.Screen
+        name="Signin"
+        component={SigninScreen}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 }
@@ -70,10 +74,7 @@ function MainTabs() {
 function RootNavigator() {
   const { state } = useContext(AuthContext);
 
-  // const isLoggedIn = !!state.token; // 👈 MUHIM
-  const { isLoggedIn } = useContext(AuthContext);
-
-  return isLoggedIn ? <MainTabs /> : <LoginStack />;
+  return state.token ? <MainTabs /> : <LoginStack />;
 }
 
 export default function App() {
